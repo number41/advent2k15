@@ -3,21 +3,40 @@ import sys
 
 unique_locations = set()
 
-x = 0
-y = 0
-unique_locations.add((x,y))
+class Entity(object):
+    def __init__(self):
+       self._x = 0
+       self._y = 0
+
+    @property
+    def coords(self):
+        return (self._x, self._y)
+
+    def inc_x(self):
+        self._x += 1
+    def dec_x(self):
+        self._x -= 1
+    def inc_y(self):
+        self._y += 1
+    def dec_y(self):
+        self._y -= 1
+
+############################
+ 
+santa = Entity()
+unique_locations.add(santa.coords)
 
 for c in sys.stdin.readline():
     if c == '<':
-        x -= 1
+        santa.dec_x()
     elif c == '>':
-        x += 1
+        santa.inc_x()
     elif c == '^':
-        y += 1
+        santa.inc_y()
     elif c == 'v':
-        y -= 1
+        santa.dec_y()
 
-    unique_locations.add((x,y))
+    unique_locations.add(santa.coords)
 
 print len(unique_locations)
     
