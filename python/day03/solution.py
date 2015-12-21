@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import itertools
 import sys
 
 unique_locations = set()
@@ -24,19 +25,21 @@ class Entity(object):
 ############################
  
 santa = Entity()
+robot = Entity()
 unique_locations.add(santa.coords)
+unique_locations.add(robot.coords)
 
-for c in sys.stdin.readline():
+for (c,entity) in zip(sys.stdin.readline(), itertools.cycle([santa,robot])):
     if c == '<':
-        santa.dec_x()
+        entity.dec_x()
     elif c == '>':
-        santa.inc_x()
+        entity.inc_x()
     elif c == '^':
-        santa.inc_y()
+        entity.inc_y()
     elif c == 'v':
-        santa.dec_y()
+        entity.dec_y()
 
-    unique_locations.add(santa.coords)
+    unique_locations.add(entity.coords)
 
 print len(unique_locations)
     
