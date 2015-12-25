@@ -23,6 +23,32 @@ def checkLine_FirstHalf(text):
             return False
     return True
 
+#################
+
+def twicePair(text):
+    i = 0
+    while i < len(text) - 2:
+        start = i + 2
+        pair = text[i:start]
+        if pair in text[start:]:
+            return True
+        i += 1
+    return False
+
+def repeatCheck(text):
+    i = 0
+    while i < len(text) - 2:
+        if text[i] == text[i+2]:
+            return True
+        i += 1
+    return False
+
+def checkLine_SecondHalf(text):
+    for check in [twicePair, repeatCheck]:
+        if not check(text):
+            return False
+    return True
+
 #######
 
-print len(filter(lambda l: checkLine_FirstHalf(l), sys.stdin.readlines()))    
+print len(filter(lambda l: checkLine_SecondHalf(l), sys.stdin.readlines()))    
