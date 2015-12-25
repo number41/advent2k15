@@ -15,16 +15,19 @@ def get_directions(line):
 #######
 
 DIMENSION = 1000
-BOARD = [[False for x in xrange(DIMENSION)] for x in xrange(DIMENSION)]
+BOARD = [[0 for x in xrange(DIMENSION)] for x in xrange(DIMENSION)]
 
 def turnOn(val):
-    return True
+    return val + 1
 
 def turnOff(val):
-    return
+    if val == 0:
+        return 0
+    else:
+        return val - 1
 
 def toggle(val):
-    return not val
+    return val + 2
 
 def handleAction(board, sx, sy, ex, ey, func):
     for x in range(sx, ex+1):
@@ -35,8 +38,7 @@ def countBoard(board):
     i = 0
     for row in board:
         for col in row:
-            if col:
-                i += 1
+            i += col
     return i
 
 instr_map = {'turn on':turnOn, 'turn off':turnOff, 'toggle':toggle}
