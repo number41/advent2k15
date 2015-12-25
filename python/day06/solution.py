@@ -35,11 +35,7 @@ def handleAction(board, sx, sy, ex, ey, func):
             BOARD[x][y] = func(BOARD[x][y]) 
 
 def countBoard(board):
-    i = 0
-    for row in board:
-        for col in row:
-            i += col
-    return i
+    return reduce(lambda row_acc, row: row_acc + reduce(lambda col_acc, col: col_acc + col, row, 0), board, 0)
 
 instr_map = {'turn on':turnOn, 'turn off':turnOff, 'toggle':toggle}
 for line in sys.stdin.readlines():
