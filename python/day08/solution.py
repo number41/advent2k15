@@ -22,10 +22,24 @@ def count_line(line):
             inmem += 1 
     return (actual, inmem)
 
+def count_line_second_half(line):
+    actual = len(line)
+    encoded = 2 # base two for the wrapping quotes
+    cursor = 0
+    while cursor < actual:
+        if line[cursor] == '"':
+            encoded += 2
+        elif line[cursor] == '\\':
+            encoded += 2
+        else:
+            encoded += 1 
+        cursor += 1
+    return (actual, encoded)
+
 actual = 0
-inmem = 0
+encoded = 0
 for line in sys.stdin.readlines():
-    (a, i) = count_line(line)
+    (a, e) = count_line_second_half(line)
     actual += a
-    inmem += i 
-print actual - inmem
+    encoded += e
+print encoded - actual
